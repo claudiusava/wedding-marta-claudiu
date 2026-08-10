@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   // Pega aquí la URL del despliegue de Google Apps Script (ver docs/google-apps-script.gs).
-  readonly rsvpEndpoint = '';
+  readonly rsvpEndpoint = 'https://script.google.com/macros/s/AKfycbw7t3eRsWisOVXiLQZPN0TkXQvvDRz44YBMPbJLY8XXRvy9I1g1S9nP8c11EkgD34XW/exec';
 
   rsvp = {
     name: '',
