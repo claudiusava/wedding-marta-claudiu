@@ -5,7 +5,7 @@
 // 4. Pega esa URL en rsvpEndpoint, dentro de src/app/app.component.ts.
 
 const SHEET_NAME = 'Respuestas';
-const HEADERS = ['Recibida', 'Nombre', 'Email', 'Asistencia', 'Asistentes', 'Alergias / menú', 'Canción', 'Mensaje'];
+const HEADERS = ['Recibida', 'Nombre', 'Asistencia', 'Acompañantes', 'Canción', 'Alergias / intolerancias', 'Mensaje'];
 
 function doPost(event) {
   const data = JSON.parse(event.postData.contents || '{}');
@@ -14,8 +14,8 @@ function doPost(event) {
   const sheet = getSheet();
   sheet.appendRow([
     data.submittedAt || new Date().toISOString(),
-    data.name || '', data.email || '', data.attendance || '', data.guests || '',
-    data.dietary || '', data.song || '', data.note || ''
+    data.name || '', data.attendance || '', data.guestNames || '',
+    data.song || '', data.dietary || '', data.note || ''
   ]);
   return response({ ok: true });
 }
