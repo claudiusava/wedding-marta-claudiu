@@ -67,11 +67,42 @@
     <div class="rsvp-card">
       <p class="eyebrow">¿Nos acompañas?</p>
       <h2 id="rsvp-titulo">Tu presencia será nuestro mejor regalo.</h2>
-      <p>En breve tendrás aquí el formulario para confirmar tu asistencia y contarnos cualquier detalle importante.</p>
-      @if (rsvpFormUrl) {
-        <a class="button button-dark" [href]="rsvpFormUrl" target="_blank" rel="noopener">Confirmar asistencia <span>→</span></a>
+      <p>Confirma tu asistencia y cuéntanos todo lo que necesitemos saber para celebrarlo contigo.</p>
+      @if (status === 'sent') {
+        <div class="success-message" role="status"><span>✦</span><strong>¡Gracias!</strong> Hemos recibido tu respuesta.</div>
       } @else {
-        <span class="form-soon">Formulario disponible próximamente</span>
+        <form #rsvpForm="ngForm" (ngSubmit)="submitRsvp()" class="rsvp-form">
+          <label class="full">Nombre y apellidos
+            <input name="name" [(ngModel)]="rsvp.name" required autocomplete="name" placeholder="¿Cómo te llamas?">
+          </label>
+          <label>Correo electrónico
+            <input name="email" [(ngModel)]="rsvp.email" required type="email" autocomplete="email" placeholder="tu@email.com">
+          </label>
+          <label>¿Nos acompañas?
+            <select name="attendance" [(ngModel)]="rsvp.attendance" required>
+              <option value="" disabled>Selecciona una opción</option>
+              <option value="Sí, allí estaré">Sí, allí estaré</option>
+              <option value="No podré asistir">No podré asistir</option>
+            </select>
+          </label>
+          @if (rsvp.attendance === 'Sí, allí estaré') {
+            <label>Número de asistentes
+              <select name="guests" [(ngModel)]="rsvp.guests"><option value="1">1 persona</option><option value="2">2 personas</option><option value="3">3 personas</option><option value="4">4 personas</option></select>
+            </label>
+            <label>¿Alergias o menú especial?
+              <input name="dietary" [(ngModel)]="rsvp.dietary" placeholder="Vegetariano, celíaco…">
+            </label>
+          }
+          <label class="full">Una canción para bailar
+            <input name="song" [(ngModel)]="rsvp.song" placeholder="Título y artista">
+          </label>
+          <label class="full">¿Quieres decirnos algo?
+            <textarea name="note" [(ngModel)]="rsvp.note" rows="3" placeholder="Nos encantará leerte"></textarea>
+          </label>
+          <input class="honeypot" name="website" [(ngModel)]="rsvp.website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="button button-dark" type="submit" [disabled]="!rsvpForm.valid || status === 'sending'">{{ status === 'sending' ? 'Enviando…' : 'Enviar confirmación' }} <span>→</span></button>
+          @if (status === 'setup') { <p class="form-alert">El formulario estará disponible muy pronto.</p> }
+        </form>
       }
     </div>
   </section>
