@@ -1,12 +1,16 @@
 <main>
   <audio #bgAudio src="assets/musica.mp3" loop preload="auto"></audio>
 
-  <button type="button" class="entrance" [class.entrance-hidden]="entered" (click)="enterSite()" aria-label="Entrar a la invitación de Marta y Claudiu">
+  <section class="entrance" [class.entrance-hidden]="entered" aria-label="Elige el idioma de la invitación">
     <span class="entrance-ring" aria-hidden="true"></span>
     <span class="entrance-monogram">M <i>&amp;</i> C</span>
     <span class="entrance-rule" aria-hidden="true"></span>
-    <span class="entrance-hint">Toca para entrar</span>
-  </button>
+    <p class="entrance-hint">Elige tu idioma · Alege limba</p>
+    <div class="entrance-languages">
+      <button type="button" (click)="selectLanguage('es')">Español</button>
+      <button type="button" (click)="selectLanguage('ro')">Română</button>
+    </div>
+  </section>
 
   @if (entered) {
     <button type="button" class="music-toggle" [class.is-playing]="musicPlaying" (click)="toggleMusic()" [attr.aria-label]="musicPlaying ? 'Pausar música' : 'Reproducir música'" [attr.aria-pressed]="musicPlaying">
@@ -18,129 +22,77 @@
     <nav aria-label="Navegación principal">
       <a class="monogram" href="#inicio" aria-label="Marta y Claudiu, inicio">M <span>&amp;</span> C</a>
       <div class="nav-links">
-        <a href="#ceremonia">La ceremonia</a>
-        <a href="#celebracion">La celebración</a>
-        <a href="#rsvp">Asistencia</a>
+        <a href="#ceremonia">{{ copy.nav.ceremony }}</a>
+        <a href="#celebracion">{{ copy.nav.celebration }}</a>
+        <a href="#rsvp">{{ copy.nav.rsvp }}</a>
       </div>
     </nav>
 
     <div class="sun" aria-hidden="true"></div>
     <div class="hero-copy">
-      <p class="eyebrow">Nos casamos</p>
+      <p class="eyebrow">{{ copy.hero.eyebrow }}</p>
       <h1>Marta <i>&amp;</i> Claudiu</h1>
-      <p class="hero-detail">2 de julio de 2027</p>
+      <p class="hero-detail">{{ copy.hero.date }}</p>
       <span class="hero-rule" aria-hidden="true"></span>
-      <p class="hero-subtitle">Cuando caiga el sol, brindaremos bajo las estrellas con los nuestros.</p>
-      <a class="button button-light" href="#rsvp">Confirma tu asistencia <span>↓</span></a>
+      <p class="hero-subtitle">{{ copy.hero.subtitle }}</p>
+      <a class="button button-light" href="#rsvp">{{ copy.hero.cta }} <span>↓</span></a>
     </div>
-    <p class="date-note">Navalcarnero · Madrid</p>
-    <p class="hero-scroll" aria-hidden="true">Desliza para descubrir <span>↓</span></p>
+    <p class="date-note">{{ copy.hero.location }}</p>
+    <p class="hero-scroll" aria-hidden="true">{{ copy.hero.scroll }} <span>↓</span></p>
   </section>
 
   <section class="intro section-shell" aria-labelledby="bienvenida">
-    <p class="eyebrow ink">Un día para recordar</p>
-    <h2 id="bienvenida">Celebraremos el comienzo de nuestra historia rodeados de las personas que más queremos.</h2>
+    <p class="eyebrow ink">{{ copy.intro.eyebrow }}</p>
+    <h2 id="bienvenida">{{ copy.intro.title }}</h2>
     <div class="olive-branch" aria-hidden="true">❋</div>
   </section>
 
   <section class="venue" id="ceremonia" aria-labelledby="ceremonia-titulo">
     <div class="venue-image" aria-hidden="true">
       <svg viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-        <circle cx="82" cy="96" r="1.4" fill="#f4efe3" opacity=".7"/>
-        <circle cx="344" cy="78" r="1.6" fill="#f4efe3" opacity=".5"/>
-        <circle cx="366" cy="188" r="1.2" fill="#f4efe3" opacity=".6"/>
-        <circle cx="52" cy="220" r="1.2" fill="#f4efe3" opacity=".45"/>
-        <path d="M118 486 V262 A92 92 0 0 1 302 262 V486" fill="none" stroke="#e5bd78" stroke-width="1.5"/>
-        <path d="M139 486 V268 A71 71 0 0 1 281 268 V486" fill="none" stroke="#e5bd78" stroke-width="1" opacity=".5"/>
-        <line x1="86" y1="486" x2="334" y2="486" stroke="#e5bd78" stroke-width="1" opacity=".6"/>
-        <line x1="210" y1="150" x2="210" y2="186" stroke="#e5bd78" stroke-width="1.2"/>
-        <line x1="195" y1="164" x2="225" y2="164" stroke="#e5bd78" stroke-width="1.2"/>
-        <path d="M58 424 C104 402 146 362 172 302" fill="none" stroke="#e5bd78" stroke-width="1" opacity=".8"/>
-        <g fill="#e5bd78" opacity=".85">
-          <ellipse cx="73" cy="409" rx="9" ry="3.4" transform="rotate(-40 73 409)"/>
-          <ellipse cx="94" cy="386" rx="9" ry="3.4" transform="rotate(35 94 386)"/>
-          <ellipse cx="117" cy="362" rx="9" ry="3.4" transform="rotate(-40 117 362)"/>
-          <ellipse cx="139" cy="338" rx="8.5" ry="3.2" transform="rotate(35 139 338)"/>
-          <ellipse cx="158" cy="314" rx="7.5" ry="2.8" transform="rotate(-35 158 314)"/>
-        </g>
+        <circle cx="82" cy="96" r="1.4" fill="#f4efe3" opacity=".7"/><circle cx="344" cy="78" r="1.6" fill="#f4efe3" opacity=".5"/><circle cx="366" cy="188" r="1.2" fill="#f4efe3" opacity=".6"/><circle cx="52" cy="220" r="1.2" fill="#f4efe3" opacity=".45"/>
+        <path d="M118 486 V262 A92 92 0 0 1 302 262 V486" fill="none" stroke="#e5bd78" stroke-width="1.5"/><path d="M139 486 V268 A71 71 0 0 1 281 268 V486" fill="none" stroke="#e5bd78" stroke-width="1" opacity=".5"/><line x1="86" y1="486" x2="334" y2="486" stroke="#e5bd78" stroke-width="1" opacity=".6"/><line x1="210" y1="150" x2="210" y2="186" stroke="#e5bd78" stroke-width="1.2"/><line x1="195" y1="164" x2="225" y2="164" stroke="#e5bd78" stroke-width="1.2"/>
+        <path d="M58 424 C104 402 146 362 172 302" fill="none" stroke="#e5bd78" stroke-width="1" opacity=".8"/><g fill="#e5bd78" opacity=".85"><ellipse cx="73" cy="409" rx="9" ry="3.4" transform="rotate(-40 73 409)"/><ellipse cx="94" cy="386" rx="9" ry="3.4" transform="rotate(35 94 386)"/><ellipse cx="117" cy="362" rx="9" ry="3.4" transform="rotate(-40 117 362)"/><ellipse cx="139" cy="338" rx="8.5" ry="3.2" transform="rotate(35 139 338)"/><ellipse cx="158" cy="314" rx="7.5" ry="2.8" transform="rotate(-35 158 314)"/></g>
       </svg>
     </div>
     <div class="venue-copy">
-      <p class="eyebrow">La ceremonia</p>
-      <h2 id="ceremonia-titulo">Iglesia de Nuestra Señora de la Asunción</h2>
-      <p class="body-copy">Diremos el «sí, quiero» en esta iglesia parroquial del centro de Navalcarnero. Nos encantaría teneros cerca en este momento tan especial.</p>
-      <p class="venue-address">Plaza de Segovia, 1 · Navalcarnero, Madrid</p>
-      <a class="text-link" href="https://www.google.com/maps/search/?api=1&query=Iglesia%20de%20Nuestra%20Se%C3%B1ora%20de%20la%20Asunci%C3%B3n%2C%20Plaza%20de%20Segovia%201%2C%20Navalcarnero" target="_blank" rel="noopener">Cómo llegar <span>↗</span></a>
+      <p class="eyebrow">{{ copy.ceremony.eyebrow }}</p><h2 id="ceremonia-titulo">{{ copy.ceremony.title }}</h2><p class="body-copy">{{ copy.ceremony.text }}</p><p class="venue-address">{{ copy.ceremony.address }}</p>
+      <a class="text-link" href="https://www.google.com/maps/search/?api=1&query=Iglesia%20de%20Nuestra%20Se%C3%B1ora%20de%20la%20Asunci%C3%B3n%2C%20Plaza%20de%20Segovia%201%2C%20Navalcarnero" target="_blank" rel="noopener">{{ copy.ceremony.directions }} <span>↗</span></a>
     </div>
   </section>
 
   <section class="celebration section-shell" id="celebracion" aria-labelledby="celebracion-titulo">
-    <p class="eyebrow ink">La celebración</p>
-    <h2 id="celebracion-titulo">Finca Las Bocas</h2>
-    <p class="lead">Tras la ceremonia, seguimos la fiesta en la finca: cóctel, cena y baile con los nuestros hasta bien entrada la noche.</p>
+    <p class="eyebrow ink">{{ copy.celebration.eyebrow }}</p><h2 id="celebracion-titulo">{{ copy.celebration.title }}</h2><p class="lead">{{ copy.celebration.lead }}</p>
     <div class="timeline">
-      <article>
-        <span>01</span>
-        <h3>Ceremonia</h3>
-        <p>Iglesia de Nuestra Señora de la Asunción, Navalcarnero</p>
-      </article>
-      <article>
-        <span>02</span>
-        <h3>Cóctel &amp; cena</h3>
-        <p>Finca Las Bocas, Cubas de la Sagra</p>
-      </article>
-      <article>
-        <span>03</span>
-        <h3>Fiesta</h3>
-        <p>Hasta las 04:00</p>
-      </article>
+      <article><span>01</span><h3>{{ copy.celebration.ceremony }}</h3><p>{{ copy.celebration.ceremonyPlace }}</p></article>
+      <article><span>02</span><h3>{{ copy.celebration.dinner }}</h3><p>{{ copy.celebration.dinnerPlace }}</p></article>
+      <article><span>03</span><h3>{{ copy.celebration.party }}</h3><p>{{ copy.celebration.partyPlace }}</p></article>
     </div>
-    <a class="text-link" href="https://www.google.com/maps/search/?api=1&query=Finca%20Las%20Bocas%2C%20Cubas%20de%20la%20Sagra" target="_blank" rel="noopener">Cómo llegar a la finca <span>↗</span></a>
+    <a class="text-link" href="https://www.google.com/maps/search/?api=1&query=Finca%20Las%20Bocas%2C%20Cubas%20de%20la%20Sagra" target="_blank" rel="noopener">{{ copy.celebration.directions }} <span>↗</span></a>
   </section>
 
   <section class="rsvp" id="rsvp" aria-labelledby="rsvp-titulo">
     <div class="rsvp-card">
-      <p class="eyebrow">¿Nos acompañas?</p>
-      <h2 id="rsvp-titulo">Tu presencia será nuestro mejor regalo.</h2>
-      <p class="body-copy">Confirma tu asistencia y cuéntanos todo lo que necesitemos saber para celebrarlo contigo.</p>
+      <p class="eyebrow">{{ copy.rsvp.eyebrow }}</p><h2 id="rsvp-titulo">{{ copy.rsvp.title }}</h2><p class="body-copy">{{ copy.rsvp.text }}</p>
       @if (status === 'sent') {
-        <div class="success-message" role="status"><span>✦</span><strong>¡Gracias!</strong> Hemos recibido tu respuesta.</div>
+        <div class="success-message" role="status"><span>✦</span><strong>{{ copy.rsvp.thanks }}</strong> {{ copy.rsvp.received }}</div>
       } @else {
         <form #rsvpForm="ngForm" (ngSubmit)="submitRsvp()" class="rsvp-form">
-          <label class="full">Nombre y apellidos
-            <input name="name" [(ngModel)]="rsvp.name" required autocomplete="name" placeholder="¿Cómo te llamas?">
-          </label>
-          <label class="full">¿Nos acompañas?
-            <select name="attendance" [(ngModel)]="rsvp.attendance" required>
-              <option value="" disabled>Selecciona una opción</option>
-              <option value="Sí, allí estaré">Sí, allí estaré</option>
-              <option value="No podré asistir">No podré asistir</option>
-            </select>
-          </label>
-          @if (rsvp.attendance === 'Sí, allí estaré') {
-            <label class="full">¿Vienes acompañado? Indícanos el nombre
-              <input name="guestNames" [(ngModel)]="rsvp.guestNames" placeholder="Nombre y apellidos de tus acompañantes">
-            </label>
-            <label class="full">Una canción para bailar
-              <input name="song" [(ngModel)]="rsvp.song" placeholder="Título y artista">
-            </label>
-            <label class="full">¿Alguna alergia o intolerancia alimentaria?
-              <input name="dietary" [(ngModel)]="rsvp.dietary" placeholder="Cuéntanos si alguien del grupo la tiene">
-            </label>
+          <label class="full">{{ copy.rsvp.name }}<input name="name" [(ngModel)]="rsvp.name" required autocomplete="name" [placeholder]="copy.rsvp.namePlaceholder"></label>
+          <label class="full">{{ copy.rsvp.attendance }}<select name="attendance" [(ngModel)]="rsvp.attendance" required><option value="" disabled>{{ copy.rsvp.select }}</option><option [value]="copy.rsvp.yes">{{ copy.rsvp.yes }}</option><option [value]="copy.rsvp.no">{{ copy.rsvp.no }}</option></select></label>
+          @if (rsvp.attendance === copy.rsvp.yes) {
+            <label class="full">{{ copy.rsvp.guests }}<input name="guestNames" [(ngModel)]="rsvp.guestNames" [placeholder]="copy.rsvp.guestsPlaceholder"></label>
+            <label class="full">{{ copy.rsvp.song }}<input name="song" [(ngModel)]="rsvp.song" [placeholder]="copy.rsvp.songPlaceholder"></label>
+            <label class="full">{{ copy.rsvp.dietary }}<input name="dietary" [(ngModel)]="rsvp.dietary" [placeholder]="copy.rsvp.dietaryPlaceholder"></label>
           }
-          <label class="full">¿Quieres decirnos algo?
-            <textarea name="note" [(ngModel)]="rsvp.note" rows="3" placeholder="Nos encantará leerte"></textarea>
-          </label>
+          <label class="full">{{ copy.rsvp.note }}<textarea name="note" [(ngModel)]="rsvp.note" rows="3" [placeholder]="copy.rsvp.notePlaceholder"></textarea></label>
           <input class="honeypot" name="website" [(ngModel)]="rsvp.website" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button class="button button-dark" type="submit" [disabled]="!rsvpForm.valid || status === 'sending'">{{ status === 'sending' ? 'Enviando…' : 'Enviar confirmación' }} <span>→</span></button>
-          @if (status === 'setup') { <p class="form-alert">El formulario estará disponible muy pronto.</p> }
+          <button class="button button-dark" type="submit" [disabled]="!rsvpForm.valid || status === 'sending'">{{ status === 'sending' ? copy.rsvp.sending : copy.rsvp.send }} <span>→</span></button>
+          @if (status === 'setup') { <p class="form-alert">{{ copy.rsvp.setup }}</p> }
         </form>
       }
     </div>
   </section>
 
-  <footer>
-    <p>Marta <span>&amp;</span> Claudiu</p>
-    <small>Con mucho cariño</small>
-  </footer>
+  <footer><p>Marta <span>&amp;</span> Claudiu</p><small>{{ copy.footer }}</small></footer>
 </main>
