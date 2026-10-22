@@ -73,22 +73,24 @@
 
   <section class="rsvp" id="rsvp" aria-labelledby="rsvp-titulo">
     <div class="rsvp-card">
-      <p class="eyebrow">{{ copy.rsvp.eyebrow }}</p><h2 id="rsvp-titulo">{{ copy.rsvp.title }}</h2><p class="body-copy">{{ copy.rsvp.text }}</p>
       @if (status === 'sent') {
-        <div class="success-message" role="status"><span>✦</span><strong>{{ copy.rsvp.thanks }}</strong> {{ copy.rsvp.received }}</div>
+        <div class="success-message" role="status"><span>✦</span><h2 id="rsvp-titulo">{{ copy.rsvp.thanks }}</h2><p>{{ copy.rsvp.received }}</p></div>
       } @else {
+        <p class="eyebrow">{{ copy.rsvp.eyebrow }}</p><h2 id="rsvp-titulo">{{ copy.rsvp.title }}</h2><p class="body-copy">{{ copy.rsvp.text }}</p>
         <form #rsvpForm="ngForm" (ngSubmit)="submitRsvp()" class="rsvp-form">
-          <label class="full">{{ copy.rsvp.name }}<input name="name" [(ngModel)]="rsvp.name" required autocomplete="name" [placeholder]="copy.rsvp.namePlaceholder"></label>
-          <label class="full">{{ copy.rsvp.attendance }}<select name="attendance" [(ngModel)]="rsvp.attendance" required><option value="" disabled>{{ copy.rsvp.select }}</option><option [value]="copy.rsvp.yes">{{ copy.rsvp.yes }}</option><option [value]="copy.rsvp.no">{{ copy.rsvp.no }}</option></select></label>
+          <label class="full">{{ copy.rsvp.name }} *<input name="name" [(ngModel)]="rsvp.name" required pattern=".*\S.*" autocomplete="name" [placeholder]="copy.rsvp.namePlaceholder"></label>
+          <label class="full">{{ copy.rsvp.attendance }} *<select name="attendance" [(ngModel)]="rsvp.attendance" required><option value="" disabled>{{ copy.rsvp.select }}</option><option [value]="copy.rsvp.yes">{{ copy.rsvp.yes }}</option><option [value]="copy.rsvp.no">{{ copy.rsvp.no }}</option></select></label>
           @if (rsvp.attendance === copy.rsvp.yes) {
             <label class="full">{{ copy.rsvp.guests }}<input name="guestNames" [(ngModel)]="rsvp.guestNames" [placeholder]="copy.rsvp.guestsPlaceholder"></label>
             <label class="full">{{ copy.rsvp.song }}<input name="song" [(ngModel)]="rsvp.song" [placeholder]="copy.rsvp.songPlaceholder"></label>
             <label class="full">{{ copy.rsvp.dietary }}<input name="dietary" [(ngModel)]="rsvp.dietary" [placeholder]="copy.rsvp.dietaryPlaceholder"></label>
           }
-          <label class="full">{{ copy.rsvp.note }}<textarea name="note" [(ngModel)]="rsvp.note" rows="3" [placeholder]="copy.rsvp.notePlaceholder"></textarea></label>
+          <label class="full">{{ copy.rsvp.note }} *<textarea name="note" [(ngModel)]="rsvp.note" required pattern="[\s\S]*\S[\s\S]*" rows="3" [placeholder]="copy.rsvp.notePlaceholder"></textarea></label>
           <input class="honeypot" name="website" [(ngModel)]="rsvp.website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="form-hint">{{ copy.rsvp.required }}</p>
           <button class="button button-dark" type="submit" [disabled]="!rsvpForm.valid || status === 'sending'">{{ status === 'sending' ? copy.rsvp.sending : copy.rsvp.send }} <span>→</span></button>
           @if (status === 'setup') { <p class="form-alert">{{ copy.rsvp.setup }}</p> }
+          @if (status === 'error') { <p class="form-alert" role="alert">{{ copy.rsvp.error }}</p> }
         </form>
       }
     </div>
